@@ -1,0 +1,108 @@
+{% macro global_nav(
+    class=false,
+    id=false,
+    nav_blocks=[
+        {
+            label: "Trending",
+            icon_name: "flame",
+            href: "/learn/channels/trending"
+        },
+        {
+            label: "By Subject",
+            icon_name: "books",
+            href: "/learn/channels/subjects"
+        },
+        {
+            label: "By Standard",
+            icon_name: "callout-state-standard",
+            href: "/learn/standards"
+        },
+        {
+            label: "My Content",
+            icon_name: "global-nav-my-content",
+            href: "/mycontent#MyContent/Favorites"
+        },
+        {
+            label: "Studio",
+            icon_name: "create",
+            href: "https://orion.discoveryeducation.com"
+        },
+        {
+            label: "Classrooms",
+            icon_name: "classroom",
+            href: "/learn/assignments"
+        },
+        {
+            label: "Instructional Strategies",
+            icon_name: "life-ring",
+            href: "/learn/channels/strategies"
+        },
+        {
+            label: "Professional Learning",
+            icon_name: "global-nav-professional-learning",
+            href: "https://teachers.dev.discoveryeducation.com"
+        },
+        {
+            label: "Educator Network",
+            icon_name: "global-nav-den",
+            href: "https://den.dev.discoveryeducation.com/home"
+        }
+    ],
+    nav_rows=[
+        {
+            label: "Math Techbook",
+            icon_name: "global-nav-math-techbook",
+            href: "/learn/techbook/math"
+        },
+        {
+            label: "Science Techbook",
+            icon_name: "global-nav-science-techbook",
+            href: "/learn/techbook/science"
+        },
+        {
+            label: "Social Studies Techbook",
+            icon_name: "global-nav-ss-techbook",
+            href: "/learn/techbook/socialStudies"
+        }
+    ]
+) %}
+    <div class="comet-global-nav">
+        {{ button(variations=["secondary"], class="comet-global-nav__trigger", icon_name="waffle", aria_label="Global Nav") }}
+        <div class="comet-global-nav__menu">
+            <div class="comet-global-nav-menu__content">
+                <ul class="comet-global-nav__blocks">
+                    {% for nav_block in nav_blocks %}
+                        {{ global_nav_block(label=nav_block.label, icon_name=nav_block.icon_name, color=nav_block.color, href=nav_block.href, icon_path=nav_block.icon_path) }}
+                    {% endfor %}
+                </ul>
+                <ul class="comet-global-nav__rows">
+                    {% for nav_row in nav_rows %}
+                        {{ global_nav_row(label=nav_row.label, icon_name=nav_row.icon_name, color=nav_row.color, href=nav_row.href, icon_path=nav_row.icon_path) }}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro global_nav_block(label=false, icon_name=false, color=false, href=false, icon_path=false) %}
+    <li class="comet-global-nav-block comet-global-nav-block--{{ label|lower|hyphenate }}{% if color %} comet-global-nav-block--custom-color{% endif %}" {% if color %}style="--background-color: {{ color }}" {% endif %}>
+        <a class="comet-global-nav-block__anchor" href="{{ href }}">
+            <div class="comet-global-nav-block__content">
+                {{ icon(name=icon_name, class="comet-icon--xl comet-global-nav-block__icon", path=icon_path) }}
+                <p class="comet-global-nav-block__title">{{ label|title }}</p>
+            </div>
+        </a>
+    </li>
+{% endmacro %}
+
+{% macro global_nav_row(label=false, icon_name=false, color=false, href=false, icon_path=false) %}
+    <li class="comet-global-nav-row comet-global-nav-row--{{ label|lower|hyphenate }}{% if color %} comet-global-nav-row--custom-color{% endif %}" {% if color %}style="--background-color: {{ color }}" {% endif %}>
+        <a class="comet-global-nav-row__anchor" href="{{ href }}">
+            <div class="comet-global-nav-row__content">
+                <p class="comet-global-nav-row__title">{{ label|upper }}</p>
+                {{ icon(name=icon_name, class="comet-icon--xl comet-global-nav-row__icon", path=icon_path) }}
+            </div>
+        </a>
+    </li>
+{% endmacro %}

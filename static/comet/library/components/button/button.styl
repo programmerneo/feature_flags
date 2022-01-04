@@ -1,0 +1,820 @@
+$background-color-button-primary = $comet-color-interactive-default;
+$background-color-button-primary-hover = $comet-color-interactive-dark;
+$background-color-button-secondary = $comet-color-neutral-90;
+$background-color-button-secondary-hover = $comet-color-neutral-80;
+$shadow-button-selected = $comet-shadow-block-edge-inset;
+
+// Small buttons should be 29px in height: (18px font size - 3px descender height) + 16px top and bottom padding
+// Regular buttons should be 47px in height: (18px font size - 3px descender height) + 16px top and bottom padding
+
+.comet-button {
+    vertical-text-crop();
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    border-radius: $comet-border-radius;
+    color: $comet-text-color-default;
+    cursor: pointer;
+    display: inline-block;
+    font-size: $comet-font-size-default;
+    font-family: $comet-font-family-body;
+    margin: $comet-space-inline-left-m;
+    padding: $comet-space-inset-default;
+    text-align: center;
+    text-decoration: none;
+    transition: background $comet-transition-default;
+    user-select: none;
+    vertical-align: middle;
+    
+    // Remove additional <button> element styles unique to firefox 
+    &::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+    }
+
+    // Adding focus ring to button focus class for doc display
+    &.comet-button--focus {
+        outline: -webkit-focus-ring-color auto 5px; 
+    }
+
+    &.comet-button--active,
+    &:active {
+        box-shadow: $comet-shadow-block-edge-inset;
+    }
+}
+
+.comet-button--icon-with-text {
+    // custom top and bottom padding to fix cross-browser flexbox rendering issues...lame
+    padding-bottom: 10px;
+    padding-top: 10px;
+    vertical-align: middle;
+    
+    
+    &:before,
+    &:after {
+        display: none;
+    }
+    
+    .comet-button__inner {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+}
+
+.comet-button--small {
+    padding: $comet-space-inset-squish-default;
+}
+
+.comet-button--pill {
+    border-radius: 24px;
+
+    &.comet-button--small {
+        border-radius: 18px;
+    }
+}
+
+.comet-button--fab {
+    comet-shadow-lift(resting: 2, active: 5);
+    border-radius: 50%;
+    height: 48px;
+    padding: 12px;
+    width: 48px
+
+    &.comet-button--disabled {
+        comet-depth-shadow(resting: 2);
+
+        &.comet-button--hover,
+        &.comet-button--focus,
+        &.comet-button--active,
+        &:hover,
+        &:focus,
+        &:active {
+            transform: none;
+        }
+    }
+}
+
+.comet-button--icon-with-text.comet-button--small {
+    // custom top and bottom padding to fix cross-browser flexbox rendering issues...lame
+    padding-bottom: 5px;
+    padding-top: 4px;
+}
+
+.comet-button--icon-with-text.comet-button--small {
+    // custom top and bottom padding to fix cross-browser flexbox rendering issues...lame
+    padding-bottom: 5px;
+    padding-top: 4px;
+}
+
+.comet-button--icon-only {
+    // custom top and bottom padding to fix cross-browser flexbox rendering issues...lame
+    padding-bottom: 18px;
+    padding-top: 18px;
+}
+
+.comet-button--icon-only.comet-button--small {
+    // custom top and bottom padding to fix cross-browser flexbox rendering issues...lame
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+.comet-button--icon-only.comet-button--wide {
+    min-width: $comet-size-xl * 1.5;
+}
+
+
+.comet-button__input--submit,
+.comet-button__input--button {
+    border: 0;
+    border-radius: $comet-border-radius;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: none;
+    color: $comet-text-color-default;
+    margin: 0;
+    padding: 0;
+    
+    .comet-button--disabled & {
+        cursor: not-allowed;
+    }
+}
+
+.comet-button__icon {
+    fill: inherit;
+    flex-shrink: 0;
+    
+    .comet-button--disabled & {
+        fill: $comet-text-color-disabled;
+    }
+    
+    .comet-button--small &,
+    .comet-button--icon-s & {
+        height: $comet-size-icon-s;
+        width: $comet-size-icon-s;
+    }
+    
+    .comet-button--icon-xs & {
+        height: $comet-size-icon-xs;
+        width: $comet-size-icon-xs;
+    }
+}
+
+.comet-button__icon--left {
+    .comet-button--icon-left-xs & {
+        height: $comet-size-icon-xs;
+        width: $comet-size-icon-xs;
+    }
+    
+    .comet-button--icon-left-s & {
+        height: $comet-size-icon-s;
+        width: $comet-size-icon-s;
+    }
+}
+
+.comet-button__icon--right {
+    .comet-button--icon-right-xs & {
+        height: $comet-size-icon-xs;
+        width: $comet-size-icon-xs;
+    }
+    
+    .comet-button--icon-right-s & {
+        height: $comet-size-icon-s;
+        width: $comet-size-icon-s;
+    }
+}
+
+.comet-button--primary {
+    background-color: $background-color-button-primary;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $background-color-button-primary-hover;
+    }
+}
+
+.comet-button--secondary {
+    background: $background-color-button-secondary;
+    color: $comet-text-color-default;
+    fill: $comet-text-color-default;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $background-color-button-secondary-hover;
+    }
+}
+
+.comet-button--science {
+    background-color: $comet-theme-product_science-color-default;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-theme-product_science-color-dark;
+    }
+}
+
+.comet-button--math {
+    background-color: $comet-theme-product_math-color-default;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-theme-product_math-color-dark;
+    }
+}
+
+.comet-button--ss {
+    background-color: $comet-theme-product_social-studies-color-default;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-theme-product_social-studies-color-dark;
+    }
+}
+
+.comet-button--stem {
+    background-color: $comet-theme-product_stem-color-default;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-theme-product_stem-color-dark;
+    }
+}
+
+.comet-button--streaming,
+.comet-button--comet {
+    background-color: $comet-theme-product_streaming-color-default;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-theme-product_streaming-color-dark;
+    }
+}
+
+.comet-button--success {
+    background-color: $comet-color-feedback-success-default;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-color-feedback-success-dark;
+    }
+}
+
+.comet-button--danger {
+    background-color: $comet-color-feedback-error-default;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-color-feedback-error-dark;
+    }
+}
+
+.comet-button--warning {
+    background-color: $comet-color-feedback-warning-default;
+    color: $comet-color-black;
+    fill: $comet-color-black;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-color-feedback-warning-dark;
+    }
+}
+
+.comet-button--new {
+    background-color: $comet-color-feedback-new-default;
+    color: $comet-color-black;
+    fill: $comet-color-black;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-color-feedback-new-dark;
+    }
+}
+
+.comet-button--light {
+    background-color: $comet-color-neutral-95;
+    color: $comet-color-black;
+    fill: $comet-color-black;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-color-neutral-90;
+    }
+}
+
+.comet-button--dark {
+    background-color: $comet-color-neutral-20;
+    color: $comet-color-white;
+    fill: $comet-color-white;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-color-neutral-15;
+    }
+}
+
+.comet-button--ghost {
+    background-color: transparent;
+    border: 2px solid;
+    border-color: $comet-color-interactive-default;
+    color: $comet-color-interactive-default;
+    fill: $comet-color-interactive-default;
+    padding: 14px;
+    transition: background .25s ease-in-out,
+                box-shadow .25s ease-in-out,
+                color .25s ease-in-out,
+                fill .25s ease-in-out;
+    
+    &.comet-button--primary {
+        border-color: $comet-color-interactive-default;
+        color: $comet-color-interactive-default;
+        fill: $comet-color-interactive-default;
+    }
+
+    &.comet-button--secondary {
+        border-color: $background-color-button-secondary;
+        color: $background-color-button-secondary;
+        fill: $background-color-button-secondary;
+    }
+
+    &.comet-button--science {
+        border-color: $comet-theme-product_science-color-default;
+        color: $comet-theme-product_science-color-default;
+        fill: $comet-theme-product_science-color-default;
+    }
+    
+    &.comet-button--math {
+        border-color: $comet-theme-product_math-color-default;
+        color: $comet-theme-product_math-color-default;
+        fill: $comet-theme-product_math-color-default;
+    }
+    
+    &.comet-button--ss {
+        border-color: $comet-theme-product_social-studies-color-default;
+        color: $comet-theme-product_social-studies-color-default;
+        fill: $comet-theme-product_social-studies-color-default;
+    }
+    
+    &.comet-button--stem {
+        border-color: $comet-theme-product_stem-color-default;
+        color: $comet-theme-product_stem-color-default;
+        fill: $comet-theme-product_stem-color-default;
+    }
+    
+    &.comet-button--streaming,
+    &.comet-button--comet {
+        border-color: $comet-theme-product_streaming-color-default;
+        color: $comet-theme-product_streaming-color-default;
+        fill: $comet-theme-product_streaming-color-default;
+    }
+
+    &.comet-button--success {
+        border-color: $comet-color-feedback-success-default;
+        color: $comet-color-feedback-success-default;
+        fill: $comet-color-feedback-success-default;
+    }
+
+    &.comet-button--danger {
+        border-color: $comet-color-feedback-error-default;
+        color: $comet-color-feedback-error-default;
+        fill: $comet-color-feedback-error-default;
+    }
+
+    &.comet-button--warning {
+        border-color: $comet-color-feedback-warning-default;
+        color: $comet-color-feedback-warning-default;
+        fill: $comet-color-feedback-warning-default;
+    }
+
+    &.comet-button--new {
+        border-color: $comet-color-feedback-new-default;
+        color: $comet-color-feedback-new-default;
+        fill: $comet-color-feedback-new-default;
+    }
+
+    &.comet-button--light,
+    &.comet-button--on-dark {
+        border-color: $comet-color-neutral-95;
+        color: $comet-color-neutral-95;
+        fill: $comet-color-neutral-95;
+    }
+
+    &.comet-button--dark {
+        border-color: $comet-color-neutral-20;
+        color: $comet-color-neutral-20;
+        fill: $comet-color-neutral-20;
+    }
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active,
+    &.comet-dropdown-trigger--menu-visible,
+    .comet-button__input:checked + &.comet-button--toggle {
+        background-color: $background-color-button-primary;
+        border-color: $background-color-button-primary;
+        color: $comet-color-white;
+        fill: $comet-color-white;
+
+        &.comet-button--primary {
+            background-color: $background-color-button-primary;
+            border-color: $background-color-button-primary;
+        }
+
+        &.comet-button--secondary {
+            background-color: $background-color-button-secondary-hover;
+            border-color: $background-color-button-secondary-hover;
+        }
+
+        &.comet-button--science {
+            background-color: $comet-theme-product_science-color-default;
+            border-color: $comet-theme-product_science-color-default;
+        }
+        
+        &.comet-button--math {
+            background-color: $comet-theme-product_math-color-default;
+            border-color: $comet-theme-product_math-color-default;
+        }
+        
+        &.comet-button--ss {
+            background-color: $comet-theme-product_social-studies-color-default;
+            border-color: $comet-theme-product_social-studies-color-default;
+        }
+        
+        &.comet-button--stem {
+            background-color: $comet-theme-product_stem-color-default;
+            border-color: $comet-theme-product_stem-color-default;
+        }
+
+        &.comet-button--streaming,
+        &.comet-button--comet {
+            background-color: $comet-theme-product_streaming-color-default;
+            border-color: $comet-theme-product_streaming-color-default;
+        }
+        
+        &.comet-button--success {
+            background-color: $comet-color-feedback-success-default;
+            border-color: $comet-color-feedback-success-default;
+        }
+
+        &.comet-button--danger {
+            background-color: $comet-color-feedback-error-default;
+            border-color: $comet-color-feedback-error-default;
+        }
+
+        &.comet-button--warning {
+            background-color: $comet-color-feedback-warning-default;
+            border-color: $comet-color-feedback-warning-default;
+            color: $comet-color-black;
+            fill: $comet-color-black;
+        }
+
+        &.comet-button--new {
+            background-color: $comet-color-feedback-new-default;
+            border-color: $comet-color-feedback-new-default;
+            color: $comet-color-black;
+            fill: $comet-color-black;
+        }
+
+        &.comet-button--light,
+        &.comet-button--on-dark {
+            background-color: $comet-color-neutral-95;
+            border-color: $comet-color-neutral-95;
+            color: $comet-color-black;
+            fill: $comet-color-black;
+        }
+
+        &.comet-button--dark {
+            background-color: $comet-color-neutral-20;
+            border-color: $comet-color-neutral-20;
+        }
+    }
+
+    &.comet-button--disabled {
+        background-color: $comet-background-color-disabled;
+        border-color: $comet-background-color-disabled;
+        color: $comet-text-color-disabled;
+        cursor: not-allowed;
+        fill: $comet-text-color-disabled;
+
+        &.comet-button--hover,
+        &.comet-button--focus,
+        &.comet-button--active,
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: $comet-background-color-disabled;
+            border-color: $comet-background-color-disabled;
+            color: $comet-text-color-disabled;
+            cursor: not-allowed;
+            fill: $comet-text-color-disabled;
+        }
+    }
+}
+
+.comet-button--flat {
+    background-color: transparent;
+    color: $comet-color-interactive-default;
+    fill: $comet-color-interactive-default;
+    transition: all $comet-transition-default;
+
+    &.comet-button--primary {
+        color: $comet-color-interactive-default;
+        fill: $comet-color-interactive-default;
+    }
+
+    &.comet-button--secondary {
+        color: $background-color-button-secondary;
+        fill: $background-color-button-secondary;
+    }
+
+    &.comet-button--science {
+        color: $comet-theme-product_science-color-default;
+        fill: $comet-theme-product_science-color-default;
+    }
+    
+    &.comet-button--math {
+        color: $comet-theme-product_math-color-default;
+        fill: $comet-theme-product_math-color-default;
+    }
+    
+    &.comet-button--ss {
+        color: $comet-theme-product_social-studies-color-default;
+        fill: $comet-theme-product_social-studies-color-default;
+    }
+    
+    &.comet-button--stem {
+        color: $comet-theme-product_stem-color-default;
+        fill: $comet-theme-product_stem-color-default;
+    }
+    
+    &.comet-button--streaming,
+    &.comet-button--comet {
+        color: $comet-theme-product_streaming-color-default;
+        fill: $comet-theme-product_streaming-color-default;
+    }
+
+    &.comet-button--success {
+        color: $comet-color-feedback-success-default;
+        fill: $comet-color-feedback-success-default;
+    }
+
+    &.comet-button--danger {
+        color: $comet-color-feedback-error-default;
+        fill: $comet-color-feedback-error-default;
+    }
+
+    &.comet-button--warning {
+        color: $comet-color-feedback-warning-default;
+        fill: $comet-color-feedback-warning-default;
+    }
+
+    &.comet-button--new {
+        color: $comet-color-feedback-new-default;
+        fill: $comet-color-feedback-new-default;
+    }
+
+    &.comet-button--light,
+    &.comet-button--on-dark {
+        color: $comet-color-neutral-95;
+        fill: $comet-color-neutral-95;
+    }
+
+    &.comet-button--dark {
+        color: $comet-color-neutral-20;
+        fill: $comet-color-neutral-20;
+    }
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active,
+    &.comet-dropdown-trigger--menu-visible,
+    .comet-button__input:checked + &.comet-button--toggle {
+        background-color: rgba($background-color-button-primary, .2);
+
+        &.comet-button--primary {
+            background-color: rgba($background-color-button-primary, .2);
+        }
+
+        &.comet-button--secondary {
+            background-color: rgba($background-color-button-secondary, .2);
+        }
+
+        &.comet-button--science {
+            background-color: rgba($comet-theme-product_science-color-default, .2);
+        }
+        
+        &.comet-button--math {
+            background-color: rgba($comet-theme-product_math-color-default, .2);
+        }
+        
+        &.comet-button--ss {
+            background-color: rgba($comet-theme-product_social-studies-color-default, .2);
+        }
+        
+        &.comet-button--stem {
+            background-color: rgba($comet-theme-product_stem-color-default, .2);
+        }
+
+        &.comet-button--streaming,
+        &.comet-button--comet {
+            background-color: rgba($comet-theme-product_streaming-color-default, .2);
+        }
+        
+        &.comet-button--success {
+            background-color: rgba($comet-color-feedback-success-default, .2);
+        }
+
+        &.comet-button--danger {
+            background-color: rgba($comet-color-feedback-error-default, .2);
+        }
+
+        &.comet-button--warning {
+            background-color: rgba($comet-color-feedback-warning-default, .2);
+        }
+
+        &.comet-button--new {
+            background-color: rgba($comet-color-feedback-new-default, .2);
+        }
+
+        &.comet-button--light,
+        &.comet-button--on-dark {
+            background-color: rgba($comet-color-neutral-95, .2);
+        }
+
+        &.comet-button--dark {
+            background-color: rgba($comet-color-neutral-20, .2);
+        }
+    }
+
+    &.comet-button--disabled {
+        background-color: $comet-background-color-disabled;
+        color: $comet-text-color-disabled;
+        cursor: not-allowed;
+        fill: $comet-text-color-disabled;
+
+        &.comet-button--hover,
+        &.comet-button--focus,
+        &.comet-button--active,
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: $comet-background-color-disabled;
+            box-shadow: none;
+            color: $comet-text-color-disabled;
+            cursor: not-allowed;
+            fill: $comet-text-color-disabled;
+            text-shadow: none;
+        }
+    }
+}
+
+// TODO: Deprecate in 3.0.0, .comet-button--icon class is no longer generated by the macro, this is to support legacy markup
+.comet-button--icon {
+    fill: $comet-color-white;
+    &.comet-button--disabled {
+        fill: $comet-text-color-disabled;
+    }
+}
+// END TODO
+
+.comet-button--disabled {
+    background-color: $comet-background-color-disabled;
+    color: $comet-text-color-disabled;
+    cursor: not-allowed;
+    fill: $comet-text-color-disabled;
+
+    &.comet-button--hover,
+    &.comet-button--focus,
+    &.comet-button--active,
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $comet-background-color-disabled;
+        box-shadow: none;
+        color: $comet-text-color-disabled;
+        cursor: not-allowed;
+        fill: $comet-text-color-disabled;
+        text-shadow: none;
+    }
+}
+
+// TODO: Deprecate non BEM class: .comet-button--icon__icon
+.comet-button__icon,
+.comet-button--icon__icon {
+    @extend .comet-icon--m;
+    vertical-align: middle;
+}
+
+// TODO: Deprecate non BEM class: .comet-button--icon__text
+.comet-button__text,
+.comet-button--icon__text {
+    vertical-align: middle;
+}
+
+// TODO: Deprecate non BEM classes: .comet-button--icon__icon, .comet-button--icon__text
+.comet-button__icon + .comet-button__text,
+.comet-button__text + .comet-button__icon,
+.comet-button--icon__icon + .comet-button--icon__text,
+.comet-button--icon__text + .comet-button--icon__icon {
+    margin: $comet-space-inline-right-s;
+}
+
+.comet-button__input {
+    accessibly-hidden();
+}
+
+// Toggle Buttons
+.comet-button--toggle {
+    .comet-button__input:checked + & {
+        box-shadow: $shadow-button-selected;
+    }
+}
+
+// Reproducing focus state on checkboxes and radio buttons, which we've hidden behind their label
+.comet-button__input:focus + label {
+    outline: -webkit-focus-ring-color auto 5px; 
+}
+
+// Right-to-Left styles
+html[dir='rtl'] {
+    @import 'rtl';   
+}
+

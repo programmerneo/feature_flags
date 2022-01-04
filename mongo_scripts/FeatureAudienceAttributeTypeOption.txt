@@ -1,0 +1,50 @@
+db.FeatureAudienceAttributeTypeOption.insertMany([
+   {
+    'label': 'is True',
+    'value': 'True',
+    'attribute_type': 'bool'
+},
+{
+    'label': 'is False',
+    'value': 'False',
+    'attribute_type': 'bool'
+},
+{
+    'label': 'equals',
+    'value': '==',
+    'attribute_type': 'string'
+},
+{
+    'label': 'contains',
+    'value': 'in',
+    'attribute_type': 'string'
+},
+{
+    'label': 'greater than',
+    'value': '>',
+    'attribute_type': 'number'
+},
+{
+    'label': 'greater than or equal',
+    'value': '>=',
+    'attribute_type': 'number'
+},
+{
+    'label': 'less than',
+    'value': '<',
+    'attribute_type': 'number'
+},
+{
+    'label': 'less than or equal',
+    'value': '<=',
+    'attribute_type': 'number'
+},
+{
+    'label': 'Not equal',
+    'value': '!=',
+    'attribute_type': 'number'
+}
+]);
+
+
+

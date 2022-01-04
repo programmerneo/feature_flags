@@ -1,0 +1,131 @@
+.comet-feature-cards {
+    align-content: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comet-feature-card {
+    comet-shadow-lift(resting: 0, active: 3)
+
+    background-color: $comet-color-white;
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+    font-family: $comet-font-family-body;
+    margin: 0 1px 1px 0; // seperate cards by a hairline
+    overflow: hidden;
+    position: relative;
+
+    @media (min-width: $comet-breakpoints-handset-landscape) {
+        flex-basis: calc(50% - 1px);
+    }
+
+    @media (min-width: $comet-breakpoints-tablet-portrait) {
+        flex-basis: calc(33.3% - 1px);
+
+        .comet-feature-cards--4-up & {
+            flex-basis: calc(25% - 1px);
+        }
+    }
+}
+
+.comet-feature-card.comet-feature-card--invisible {
+    height: 0;
+    margin: 0;
+    visibility: hidden;
+}
+
+// Content
+
+.comet-feature-card__anchor {
+    text-body()
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-decoration: none;
+}
+
+.comet-feature-card__thumbnail {
+    border-radius: 0;
+    padding-top: 40%;
+
+    @media (min-width: $comet-breakpoints-handset-landscape) {
+        padding-top: 84%; // percentage ratio to get correct image sizing
+    }
+}
+
+.comet-feature-card__content {
+    padding: $comet-space-inset-l;
+}
+
+.comet-feature-card__title {
+    color: $comet-color-interactive-default;
+    line-height: $comet-font-line-height-s;
+    margin: $comet-space-stack-l;
+    transition: color $comet-transition-default;
+
+    .comet-feature-card:hover & {
+        color: $comet-color-interactive-dark;
+    }
+}
+
+.comet-feature-card__title-icon {
+    height: 40px;
+    transition: fill $comet-transition-default;
+}
+.comet-feature-card__title-icon--science {
+    fill: $comet-theme-product_science-color-default;
+
+    .comet-feature-card:hover & {
+        fill: $comet-theme-product_science-color-dark;
+    }
+}
+.comet-feature-card__title-icon--social-studies {
+    fill: $comet-theme-product_social-studies-color-default;
+
+    .comet-feature-card:hover & {
+        fill: $comet-theme-product_social-studies-color-dark;
+    }
+}
+.comet-feature-card__title-icon--math {
+    fill: $comet-theme-product_math-color-default;
+
+    .comet-feature-card:hover & {
+        fill: $comet-theme-product_math-color-dark;
+    }
+}
+.comet-feature-card__title-icon--stem {
+    fill: $comet-theme-product_stem-color-default;
+
+    .comet-feature-card:hover & {
+        fill: $comet-theme-product_stem-color-dark;
+    }
+
+}
+
+.comet-feature-card__description {
+    color: $comet-text-color-primary-on-light;
+    font-size: $comet-font-size-default;
+    margin: 0;
+    margin-top: $comet-space-s;
+}
+
+
+.comet-feature-card__cta {
+    background-color: $comet-color-black;
+    border-radius: 0;
+    display: flex;
+    margin: auto 0 0 auto;
+
+    &:hover {
+        background-color: $comet-color-black;
+    }
+
+    .comet-feature-card:hover & {
+        background-color: $comet-color-interactive-dark;
+    }
+}

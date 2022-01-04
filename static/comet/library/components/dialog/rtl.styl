@@ -1,0 +1,17 @@
+
+.comet-dialog {
+	
+	@media screen and (min-width: $comet-breakpoints-tablet-narrow-portrait) {
+		.comet-dialog__button {
+			margin-right: auto;
+		}
+		
+		.comet-dialog__button:not(.comet-dialog__button--cancel) + .comet-dialog__button {
+			margin: $comet-space-inline-left-default;
+		}
+		
+		.comet-dialog__button--cancel {
+		    margin-right: 0;
+		}
+	}
+}

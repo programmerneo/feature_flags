@@ -1,0 +1,6 @@
+Flask
+Flask-PyMongo
+Flask-SQLAlchemy
+SQLAlchemy
+pyodbc
+sqlescapy

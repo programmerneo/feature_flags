@@ -1,0 +1,26 @@
+.comet-dropdown {
+	display: inline-block;
+	position: relative;
+	
+	.comet-button {
+		margin-left: $comet-space-default;
+		margin-right: 0;
+	}
+	
+	.comet-dropdown-menu.visible {
+		top: 100%;
+	}
+	
+	.comet-dropdown-menu__list-group .comet-list-group__row-label {
+		white-space: nowrap;
+	}
+	
+	.comet-dropdown-menu__list-group .comet-list-group__row-type-icon + .comet-list-group__row-label {
+	    margin-left: 0;
+	    margin-right: $comet-space-s;
+	}
+	
+	.comet-list-group__row.comet-list-group__row--selected:before {
+		left: auto;
+	}
+}

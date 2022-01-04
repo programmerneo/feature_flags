@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Flask Test</title>
+
+        <script src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+    </head>
+
+    <body style="padding-left: 50px;">
+        <h3><a href="/">Home</a> &gt <a href="/attribute_filter/list">List</a> &gt Create an Attribute (Property)</h3>
+        {% if saved_message and saved_message|length > 0 %}
+        <div class="alert alert-success" role="alert">
+            {{ saved_message }}
+        </div>
+        {% endif %}
+        <form method="POST"">
+            <label for=" key">Attribute Key/Code:</label><br>
+            <input type="text" id="key" name="key" value="" maxlength="25"> (must be uniqe in the system eg. account_guid)<br>
+            <label for="attribute-type">Type:</label><br>
+            <select name="attribute-type" id="attribute-type">
+                {% for attribute_type in attribute_types %}
+                <option value="{{ attribute_type.type }}">{{ attribute_type.name }}</option>
+                {% endfor %}
+            </select><br>
+            <label for="description">Attribute Description:</label><br>
+            <textarea type="text" id="description" name="description" value=""></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+
+</html>

@@ -1,0 +1,57 @@
+accessibly-hidden() {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    order: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.comet-screenreader-only {
+    accessibly-hidden();
+}
+
+lightMinContrast(backgroundColor, ratio = 4.5) {
+
+    // Returns the lightest value that has at least a 4.5:1 contrast ratio with the passed color
+
+    grayScale = $comet-color-white $comet-color-neutral-95 $comet-color-neutral-90 $comet-color-neutral-80 $comet-color-neutral-65 $comet-color-neutral-55 $comet-color-neutral-50 $comet-color-neutral-42 $comet-color-neutral-38 $comet-color-neutral-32 $comet-color-neutral-25 $comet-color-neutral-20 $comet-color-neutral-15 $comet-color-black
+    
+    for colorValue in grayScale {
+        if (contrast(colorValue, backgroundColor).ratio >= ratio) {
+            return colorValue
+        }
+    }
+
+}
+
+darkMinContrast(backgroundColor, ratio = 4.5) {
+
+    // Returns the darkest value that has at least a 4.5:1 contrast ratio with the passed color
+
+    grayScale = $comet-color-black, $comet-color-neutral-15, $comet-color-neutral-20, $comet-color-neutral-25, $comet-color-neutral-32, $comet-color-neutral-38, $comet-color-neutral-42, $comet-color-neutral-50, $comet-color-neutral-55, $comet-color-neutral-65, $comet-color-neutral-80, $comet-color-neutral-90, $comet-color-neutral-95, $comet-color-white
+    
+    for colorValue in grayScale {
+        if (contrast(colorValue, backgroundColor).ratio >= ratio) {
+            return colorValue
+        }
+    }
+
+}
+
+contrastText($backgroundColor, $lightColor = $comet-color-white, $darkColor = $comet-color-neutral-25, $contrastRatio = 4.5) {
+
+    // returns the light or dark color value for text based on the passed background color
+    
+    if (contrast($lightColor, $backgroundColor).ratio >= $contrastRatio) {
+        return $lightColor
+    }
+
+    if (contrast($darkColor, $backgroundColor).ratio >= $contrastRatio) {
+        return $darkColor
+    }
+
+}

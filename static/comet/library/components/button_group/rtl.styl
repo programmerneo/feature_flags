@@ -1,0 +1,49 @@
+$button-border-gradient = linear-gradient(-90deg,rgba(38,38,38,0.2),rgba(38,38,38,0.2) 2px,rgba(38,38,38,0) 2px);
+$button-border-gradient-vertical = linear-gradient(180deg, rgba(38,38,38,0.2),rgba(38,38,38,0.2) 2px,rgba(38,38,38,0) 2px);
+.comet-button-group {
+	.comet-button {
+		margin: 0;
+		background-image: $button-border-gradient;
+		
+		.comet-button__icon {
+			margin: 0;
+
+			& + .comet-button__text {
+				margin: $comet-space-inline-left-s;
+			}	
+		} 
+		
+		&:first-child {
+			background-image: none;
+			border-radius: 0 $comet-border-radius $comet-border-radius 0;
+		}
+		
+		&:last-child {
+			border-radius: $comet-border-radius 0 0 $comet-border-radius;
+			
+			.comet-button__icon {
+				margin: 0;
+			}
+		}
+	}
+	
+	.comet-button__input:first-child + .comet-button {
+		background-image: none;
+	    border-radius: 0 $comet-border-radius $comet-border-radius 0;
+	}
+}
+
+.comet-button-group--vertical {
+	.comet-button {
+        background-image:  $button-border-gradient-vertical;
+        
+        &:last-child {
+            border-radius: 0 0 $comet-border-radius $comet-border-radius;
+        }
+    }
+    
+    .comet-button:first-child,
+    .comet-button__input:first-child + .comet-button  {
+        border-radius: $comet-border-radius $comet-border-radius 0 0;
+    }
+}

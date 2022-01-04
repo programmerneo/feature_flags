@@ -1,0 +1,41 @@
+To keep your global Python interpreter clean it is a good idea to make a virtual environment:
+
+for Python 3 ....
+$ virtualenv -p python3 venv
+$ . venv/bin/activate
+Then you need to install the dependencies:
+
+(venv) $ pip3 install -r requirements.txt   <--- Always use pip3
+Finally you can run the application:
+
+(venv) $  flask run     (OR  python3 app.py ... this may not work  )
+
+Now open your web browser and navigate to http://localhost:5000 and you will get a page with two forms as shown in the following screenshot:
+
+
+******* ATTENTION - this app requires install of ODBC driver for the sql to work - follow directions from below link *********
+https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#macos
+
+/***************** INSIDE THE VM - run below to install Mac pyodbc ***************/
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+brew update
+HOMEBREW_NO_ENV_FILTERING=1 ACCEPT_EULA=Y brew install msodbcsql17 mssql-tools
+
+
+... NOTE: might also have to upgrade Python....  brew install python3.9-dev
+
+... NOTE2: know issue with Big Sur (run below commands to point symlink from openssl@3 to openssl@1.1 for openssl)
+https://github.com/mkleehammer/pyodbc/issues/967
+
+rm /usr/local/opt/openssl
+ln -s /usr/local/Cellar/openssl@1.1/1.1.1l_1 /usr/local/opt/openssl
+
+/********************************************************************************/
+
+****** Workaround - if you get a Certificate error *******
+[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)
+... search for and double click on "Install Certificates.command"
+
+

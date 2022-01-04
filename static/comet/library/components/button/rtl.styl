@@ -1,0 +1,29 @@
+
+
+.comet-button {
+	margin-left: 0;
+	margin-right: $comet-space-default;
+	
+	.comet-button__text {
+		margin-left: 0;
+		margin-right: $comet-space-s;
+	}
+	
+	.comet-button__icon {
+		margin: 0;
+		transform: scaleX(-1);
+	}
+	
+	&.comet-button--icon-with-text {
+		.comet-button__icon--left {
+			margin: $comet-space-inline-right-s;
+		}
+	}
+}
+
+.comet-button--icon-with-text {
+	.comet-button__text {
+		margin-left: $comet-space-s;
+    	margin-right: 0;
+	}
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flask Test</title>
+
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"
+              integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+              crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+</head>
+<body style="padding-left: 50px;">
+    <h1>Settings</h1>
+
+
+    <ul class="nav nav-tabs">
+        {% for group in page_data.groupings %}
+            <li class="nav-item">
+                <a class="nav-link {% if group.is_active %}active{% endif %}" href="?group_id={{ group.value }}">{{ group.label }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="container" style="float: left; padding-top: 50px;">
+        {% for setting in page_data.settings %}
+
+            {% if setting.data_type == 'boolean' %}
+                <div class="checkbox">
+                    <label for="{{setting.id}}">
+                        <input name="{{setting.id}}" id="{{setting.id}}" type="checkbox" {% if setting.value == 'true' %}checked{% endif %} data-toggle="toggle" value="true">
+                        {{setting.label}} -- {{setting.label}} - ({{setting.who_set}})
+                    </label>
+                </div>
+            {% endif %}
+
+            {% if setting.data_type == 'string' %}
+                <div class="form-group">
+                    <label for="{{setting.id}}">{{setting.label}}:</label>
+                    <select class="form-control" name="{{setting.id}}" id="{{setting.id}}" style='width:100px'>
+                        {% for allowed_value in setting.allowed_values %}
+                            <option value="{{allowed_value.value}}" {% if allowed_value.value == setting.value %}selected{% endif %}>{{allowed_value.label}}</option>
+                        {% endfor %}
+                    </select> - ({{setting.who_set}})
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+</body>
+</html>

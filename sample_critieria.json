@@ -1,0 +1,36 @@
+[
+	[
+		{
+			"name": "is_student",
+			"data_type": "bool",
+			"match_type": "bool",
+			"value": true
+		},
+		{
+			"name": "site_guid",
+			"data_type": "guid",
+			"match_type": "list",
+			"value": [
+				11123-456-789456,
+				8899-6545-78543132
+			]
+		}
+	],
+	[
+		{
+			"name": "country_code",
+			"data_type": "string",
+			"match_type": "eq",
+			"value": "US"
+		},
+		{
+			"name": "role_code",
+			"data_type": "string",
+			"match_type": "list",
+			"value": [
+				"teacher",
+				"admin"
+			]
+		}
+	]
+]

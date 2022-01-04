@@ -1,0 +1,216 @@
+.comet-global-nav {
+    text-body();
+}
+
+.comet-global-nav__trigger {
+    background: $comet-color-neutral-25;
+
+    .comet-button__icon {
+        fill: $comet-color-neutral-80;
+        transition: fill $comet-transition-default;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: $comet-color-neutral-25;
+
+        .comet-button__icon {
+            fill: $comet-color-white;
+        }
+    }
+}
+
+.comet-global-nav__menu {
+    background-color: $comet-color-white;
+    border: $comet-border-hairline-default;
+    border-radius: $comet-border-radius;
+    box-shadow: $comet-shadow-z-shadow-3;
+    padding: $comet-space-m;
+    width: 100%;
+
+    @media(min-width: $comet-breakpoints-tablet-portrait) {
+        width: 430px;
+    }
+}
+
+
+// GLOBAL NAV BLOCKS
+.comet-global-nav__blocks {
+    display flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comet-global-nav-block {
+    background-color: $comet-color-neutral-25;
+    border-radius: $comet-border-radius;
+    display: flex;
+    margin: 0 0 $comet-space-s 0;
+    text-align: cneter;
+    transition: background $comet-transition-default;
+    width: "calc(33.3% - %s * 2 / 3)" % $comet-space-s;
+
+    &:hover {
+        background-color: $comet-color-neutral-20;
+    }
+
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+        background-color: $comet-color-interactive-default;
+    
+        &:hover {
+            background-color: $comet-color-interactive-dark;
+        }
+    }
+
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+        background-color: $comet-color-orchid-default;
+    
+        &:hover {
+            background-color: $comet-color-orchid-dark;
+        }
+    }
+
+    &:nth-child(7),
+    &:nth-child(8),
+    &:nth-child(9) {
+        background-color: $comet-color-emerald-default;
+        margin: 0;
+    
+        &:hover {
+            background-color: $comet-color-emerald-dark;
+        }
+    }
+
+    &.comet-global-nav-block--custom-color {
+        background-color: var(--background-color)
+
+        &:hover {
+            background-color: var(--background-color)
+        }
+    }
+}
+
+
+.comet-global-nav-block__anchor {
+    color: $comet-color-white;
+    flex-grow: 1;
+    text-decoration: none;
+}
+
+.comet-global-nav-block__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.comet-global-nav-block__icon {
+    fill: $comet-color-white;
+    height: 45px;
+    margin: $comet-space-m 0 0;
+    width: 45px;
+}
+
+.comet-global-nav-block__title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: $comet-space-s;
+    text-align: center;
+}
+
+
+// GLOBAL NAV ROWS
+.comet-global-nav__rows {
+    border-top: $comet-border-hairline-default;
+    display flex;
+    flex-direction: column;
+    list-style: none;
+    margin: $comet-space-s 0 0;
+    padding: $comet-space-s 0 0;
+}
+
+.comet-global-nav-row {
+    background-color: $comet-color-neutral-25;
+    border-radius: $comet-border-radius;
+    display: flex;
+    margin: 0 0 $comet-space-s 0;
+    text-align: cneter;
+    transition: background $comet-transition-default;
+
+    &:hover {
+     background-color: $comet-color-neutral-20;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &.comet-global-nav-row--custom-color {
+        background-color: var(--background-color)
+
+        &:hover {
+            background-color: var(--background-color)
+        }
+    }
+}
+
+.comet-global-nav-row--math-techbook {
+    background-color: $comet-color-math-default;
+    
+    &:hover {
+        background-color: $comet-color-math-dark;
+    }
+}
+
+.comet-global-nav-row--science-techbook {
+    background-color: $comet-color-science-default;
+    
+    &:hover {
+        background-color: $comet-color-science-dark;
+    }
+}
+
+.comet-global-nav-row--social-studies-techbook {
+    background-color: $comet-color-social-studies-default;
+    
+    &:hover {
+        background-color: $comet-color-social-studies-dark;
+    }
+}
+
+.comet-global-nav-row__anchor {
+    color: $comet-color-white;
+    flex-grow: 1;
+    text-decoration: none;
+}
+
+.comet-global-nav-row__content {
+    align-items: center;
+    display: flex;
+    padding: $comet-space-s;
+}
+
+.comet-global-nav-row__title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.comet-global-nav-row__icon {
+    fill: $comet-color-white;
+    height: 20px;
+    margin: 0 0 0 auto;
+    width: 20px;
+}
+
+html[dir="rtl"] {
+    @import 'rtl';
+}

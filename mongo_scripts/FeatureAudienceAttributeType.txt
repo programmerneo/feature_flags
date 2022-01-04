@@ -1,0 +1,21 @@
+db.FeatureAudienceAttributeType.insertMany([
+   {
+    'name': 'Boolean',
+    'type': 'bool'
+},
+{
+    'name': 'GUID',
+    'type': 'guid'
+},
+{
+    'name': 'String',
+    'type': 'string'
+},
+{
+    'name': 'Number',
+    'type': 'number'
+},
+]);
+
+
+

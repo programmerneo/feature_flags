@@ -1,0 +1,38 @@
+// Callout Variables
+$comet-background-color-callout-orange = #FFF3E2;
+$comet-color-callout-orange = #DE8000;
+
+$comet-background-color-callout-purple = #F3EDF8;
+$comet-color-callout-purple = #864CB9;
+
+$comet-background-color-callout-blue = #E7F4F8;
+$comet-color-callout-blue = #39A5C0;
+
+$comet-background-color-callout-red = #FCEFF3;
+$comet-color-callout-red = #DF5C84;
+
+.comet-callout {
+    border-left: 0;
+    border-right: solid $comet-border-activetab-width;
+    
+    .comet-callout__icon-box {
+    	    padding: $comet-space-inline-right-s;
+    }
+    
+    &.comet-callout--definition {
+	    border-color: $comet-color-callout-purple;
+	}
+	
+	&.comet-callout--did-you-know {
+		border-color: $comet-color-callout-red;
+	}
+	
+	&.comet-callout--focus-benchmark,
+	&.comet-callout--teacher-note {
+		border-color: $comet-color-callout-blue;
+	}
+	
+	&.comet-callout--misconception {
+		border-color: $comet-color-callout-orange;
+	}
+}

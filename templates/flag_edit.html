@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Flask Test</title>
+
+        <script src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <style>
+            .criteria {
+                border-style: solid;
+                padding: 5px 5px;
+            }
+
+            .criteria-row {
+                border-style: groove;
+                padding: 5px 5px;
+            }
+
+            .float-right {
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body style="padding-left: 50px;">
+        <h3><a href="/">Home</a> &gt <a href="/flag/list">List</a> &gt Edit an flag</h3>
+        {% if saved_message and saved_message|length > 0 %}
+        <div class="alert alert-success" role="alert">
+            {{ saved_message }}
+        </div>
+        {% endif %}
+        <form method="POST">
+            <label for="">Name:</label><br>
+            <input type=" text" id="name" name="name" value="{{ flag.name }}" maxlength="25"> ("persona" name of this flag eg. US teachers)<br>
+            <label for="description">Description:</label><br>
+            <textarea type="text" id="description" name="description">{{ flag.description }}</textarea><br>
+            <label for="feature_on">Feature On:</label><br>
+            <input type="radio" name="feature_on" value="true"> ON &nbsp;&nbsp; <input type="radio" name="feature_on" value="false" checked> OFF<br><br>
+            <div><button id="addrowOr" type="button" class="btn btn-success float-right"> add Or </button></div><br><br>
+            <h2>Criteria</h2>
+            <div id="criteria1" class="criteria">
+                <div><button id="addrow" type="button" class="btn btn-info float-right"> + </button></div><br><br>
+                <div name="criteria-row" id="row-1" data-row-num="1" class="criteria-row">
+                    <button type="button" class="btn btn-danger float-right"> x </button>
+
+                    <span id="row-1-span">
+                        <select name="name" data-row-num="1">
+                            <option value="">- select one -</option>
+                            {% for attribute in attributes %}
+                            <option value="{{ attribute._id }}" data-type="{{ attribute.attribute_type }}">{{ attribute._id }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="hidden" name="data_type" id="data_type1" data-row-num="1" value="" />
+
+                        <select name="match_type" id="match_type1" data-row-num="1">
+
+                        </select>
+
+                        <input type="text" name="value" id="value1" data-row-num="1">
+                    </span>
+
+                </div>
+            </div>
+            <h2>Or</h2>
+            <div id="criteria2" class="criteria">
+                <div><button id="addrow2" type="button" class="btn btn-info float-right"> + </button></div><br><br>
+                <div name="criteria-row2" id="row-1" data-row-num="1" class="criteria-row">
+                    <button type="button" class="btn btn-danger float-right"> x </button>
+
+                    <span id="row-1-span">
+                        <select name="name" data-row-num="1">
+                            <option value="">- select one -</option>
+                            {% for attribute in attributes %}
+                            <option value="{{ attribute._id }}" data-type="{{ attribute.attribute_type }}">{{ attribute._id }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <input type="hidden" name="data_type" id="data_type1" data-row-num="1" value="" />
+
+                        <select name="match_type" id="match_type1" data-row-num="1">
+
+                        </select>
+
+                        <input type="text" name="value" id="value1" data-row-num="1">
+                    </span>
+
+                </div>
+            </div>
+            <br>
+            <button id="save" type="button" class="btn btn-primary">Save</button>
+        </form>
+    </body>
+
+    <script>
+        const criteria_options = {{ attribute_options | tojson }}
+        const attribute_options = {{ attributes | tojson }}
+        const selectBoxes = document.getElementsByName('name')
+        let rowCount = 1
+
+        let foo
+
+
+        // Add a row
+        document.getElementById('addrow').addEventListener('click', (e) => {
+            foo = e.target
+            let parentDiv = document.getElementById('criteria1');
+            rowCount++
+
+            let el = document.createElement('DIV');
+            el.className = 'criteria-row';
+            el.setAttribute('name', 'criteria-row');
+            el.id = 'row-' + rowCount;
+            el.dataset.rowNum = rowCount;
+            parentDiv.appendChild(el)
+
+            let spanEl = document.createElement('SPAN');
+            spanEl.id = 'row-' + rowCount + '-span';
+            el.appendChild(spanEl);
+
+            let selectNameList = document.createElement('select');
+            selectNameList.setAttribute('name', 'name');
+            selectNameList.id = 'name';
+            selectNameList.dataset.rowNum = rowCount;
+            spanEl.appendChild(selectNameList);
+
+            //Create and append the options
+            let option = document.createElement('option');
+            option.value = '';
+            option.text = '- select one -';
+            selectNameList.appendChild(option);
+            for (var i = 0; i < attribute_options.length; i++) {
+                let option = document.createElement('option');
+                option.value = attribute_options[i]['_id'];
+                option.text = attribute_options[i]['_id'];
+                option.dataset.type = attribute_options[i]['attribute_type'];
+                selectNameList.appendChild(option);
+            }
+
+            let inputHidden = document.createElement('input');
+            inputHidden.setAttribute("type", "hidden");
+            inputHidden.setAttribute('name', 'data_type');
+            inputHidden.id = 'data_type' + rowCount;
+            inputHidden.dataset.rowNum = rowCount;
+            spanEl.appendChild(inputHidden);
+
+            let selectMatchList = document.createElement('select');
+            selectMatchList.setAttribute('name', 'match_type');
+            selectMatchList.id = 'match_type' + rowCount;
+            selectMatchList.dataset.rowNum = rowCount;
+            spanEl.appendChild(selectMatchList);
+
+            let inputValue = document.createElement('input');
+            inputValue.setAttribute('name', 'value');
+            inputValue.id = 'value' + rowCount;
+            inputValue.dataset.rowNum = rowCount;
+            spanEl.appendChild(inputValue);
+
+            // now add listener to row select box
+            selectNameList.addEventListener('change', (e) => {
+                let target = e.target
+                let types = criteria_options.filter(item => item.attribute_type === target.selectedOptions[0].dataset.type)
+                let selectBox = document.getElementById('match_type' + target.dataset.rowNum)
+
+                // update hidden field
+                document.getElementById('data_type' + target.dataset.rowNum).value = target.selectedOptions[0].dataset.type
+
+                while (selectBox.options.length > 0) {
+                    selectBox.remove(0);
+                }
+
+                types.forEach((item) => {
+                    let option = document.createElement('option');
+                    option.setAttribute('value', item.value);
+                    option.setAttribute('label', item.label);
+                    selectBox.add(option);
+                })
+
+            });
+
+        });
+
+
+        // dropdown changed - update other criteria dropdown
+        for (let i = 0; i < selectBoxes.length; i++) {
+            selectBoxes[i].addEventListener('change', (e) => {
+                let target = e.target
+                let types = criteria_options.filter(item => item.attribute_type === target.selectedOptions[0].dataset.type)
+                let selectBox = document.getElementById('match_type' + target.dataset.rowNum)
+
+                // update hidden field
+                document.getElementById('data_type' + target.dataset.rowNum).value = target.selectedOptions[0].dataset.type
+
+                while (selectBox.options.length > 0) {
+                    selectBox.remove(0);
+                }
+
+                types.forEach((item) => {
+                    let option = document.createElement('option');
+                    option.setAttribute('value', item.value);
+                    option.setAttribute('label', item.label);
+                    selectBox.add(option);
+                })
+
+            });
+        }
+
+        // Save button pressed
+        document.getElementById('save').addEventListener('click', (e) => {
+            postData()
+        });
+
+        const postData = () => {
+            let validData = false
+            let formFlagInfo = {}
+            let formCriteria = []
+            let elm, level1Items, level2Items, item, item2
+            const divElements = document.getElementsByName("criteria-row");
+
+            try {
+                formFlagInfo = {
+                    'name': document.getElementById('name').value,
+                    'description': document.getElementById('description').value,
+                    'criteria': []
+                }
+                divElements.forEach(elm => {
+                    record = {}
+                    level1Items = elm.childNodes
+
+                    level1Items.forEach(item => {
+                        if (item.tagName === 'SELECT') {
+                            record[item.name] = item.value
+                        }
+                        if (item.tagName === 'SPAN') {
+                            level2Items = item.childNodes
+
+                            level2Items.forEach(item2 => {
+                                if (['SELECT', 'INPUT'].includes(item2.tagName)) {
+                                    record[item2.name] = item2.value
+                                }
+                            })
+                        }
+                    })
+                    formCriteria.push(record)
+                    validData = true
+                });
+
+                formFlagInfo['criteria'].push(formCriteria)
+
+            } catch (e) {
+                console.log(e)
+                alert('An error occured, see console ...')
+                return false;
+            }
+
+            if (validData) {
+
+                $.ajax({
+                    url: '/flag/edit/{{ flag._id }}',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formFlagInfo),
+                    success: function (response) {
+                        alert("success");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                        alert("error");
+                    },
+                });
+            }
+        }
+    </script>
+
+</html>
